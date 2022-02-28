@@ -1,0 +1,30 @@
+QUESTION:
+Print the country which uses US Dollars as currency.
+
+ANSWER:
+const request=new XMLHttpRequest();
+
+request.open("GET","https://restcountries.com/v3.1/all")
+request.send()
+
+
+request.onload=function(){
+    if(request.status>=200 && request.status<300){
+       var data=JSON.parse(request.response);
+ //Print the country which uses US Dollars as currency
+    for(let i=0;i<data.length;i++){
+       let isCurrency = data[i].currencies !== undefined;
+             if(isCurrency){
+                  let currencyObj = data[i].currencies;
+                  let isUSD  = currencyObj.USD !== undefined;
+                     if(isUSD){
+                      console.log("Curreny USD Country: ",data[i].name);
+                }
+             }
+        }
+ 
+    }
+}
+
+
+
